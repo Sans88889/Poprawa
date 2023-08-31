@@ -1,1 +1,146 @@
+ZADANIE 1
+using System;
 
+class Program
+{
+    static void Main()
+    {
+        const int rows = 10;
+        const int cols = 10;
+        int[,] matrix = new int[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            if (i % 2 == 0) // Even rows
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i, j] = i * cols + j + 1;
+                }
+            }
+            else // Odd rows
+            {
+                for (int j = cols - 1; j >= 0; j--)
+                {
+                    matrix[i, j] = i * cols + (cols - j);
+                }
+            }
+        }
+
+        // Printing the matrix
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+
+ZADANIE 2
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        const int size = 10;
+        int[,] matrix = new int[size, size];
+
+        int currentNumber = 1;
+        int leftColumn = 0;
+        int rightColumn = size - 1;
+        int topRow = 0;
+        int bottomRow = size - 1;
+
+        while (currentNumber <= size * size)
+        {
+            for (int i = topRow; i <= bottomRow; i++)
+            {
+                matrix[i, leftColumn] = currentNumber;
+                currentNumber++;
+            }
+            leftColumn++;
+
+            for (int i = leftColumn; i <= rightColumn; i++)
+            {
+                matrix[bottomRow, i] = currentNumber;
+                currentNumber++;
+            }
+            bottomRow--;
+
+            for (int i = bottomRow; i >= topRow; i--)
+            {
+                matrix[i, rightColumn] = currentNumber;
+                currentNumber++;
+            }
+            rightColumn--;
+
+            for (int i = rightColumn; i >= leftColumn; i--)
+            {
+                matrix[topRow, i] = currentNumber;
+                currentNumber++;
+            }
+            topRow++;
+        }
+
+        // Printing the matrix
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+ZADANIE 3 
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int size;
+
+        do
+        {
+            Console.Write("Podaj rozmiar tablicy (liczba wierszy/kolumn): ");
+        } while (!int.TryParse(Console.ReadLine(), out size) || size <= 0);
+
+        int[,] matrix = new int[size, size];
+
+        for (int i = 0; i < size; i++)
+        {
+            if (i % 2 == 0) // Even rows
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    matrix[i, j] = i * size + j + 1;
+                }
+            }
+            else // Odd rows
+            {
+                for (int j = size - 1; j >= 0; j--)
+                {
+                    matrix[i, j] = i * size + (size - j);
+                }
+            }
+        }
+
+        // Printing the matrix
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                Console.Write(matrix[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
