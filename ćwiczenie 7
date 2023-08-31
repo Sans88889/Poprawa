@@ -1,1 +1,145 @@
+ZADANIE 1 
+using System;
+
+class Program
+{
+    static string FormatTime(int seconds)
+    {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+
+        return $"{hours:D2}:{minutes:D2}:{remainingSeconds:D2}";
+    }
+
+    static void Main()
+    {
+        int elapsedTimeInSeconds = 332;
+        string formattedTime = FormatTime(elapsedTimeInSeconds);
+        Console.WriteLine(formattedTime);
+    }
+}
+
+ZADANIE 2
+using System;
+
+class Program
+{
+    static double CalculateDistance(double x1, double y1, double x2, double y2)
+    {
+        double deltaX = x2 - x1;
+        double deltaY = y2 - y1;
+        return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+
+    static void Main()
+    {
+        double x1 = 1.0;
+        double y1 = 2.0;
+        double x2 = 4.0;
+        double y2 = 6.0;
+
+        double distance = CalculateDistance(x1, y1, x2, y2);
+        Console.WriteLine($"Długość odcinka między punktami: {distance}");
+    }
+}
+
+ZADANIE 3 
+using System;
+
+class Program
+{
+    static double CalculateMedian(int[] array, int length)
+    {
+        Array.Sort(array, 0, length);
+
+        if (length % 2 == 0)
+        {
+            int middleIndex1 = length / 2 - 1;
+            int middleIndex2 = length / 2;
+            return (array[middleIndex1] + array[middleIndex2]) / 2.0;
+        }
+        else
+        {
+            int middleIndex = length / 2;
+            return array[middleIndex];
+        }
+    }
+
+    static void Main()
+    {
+        int[] numbers = { 5, 2, 8, 1, 9, 4, 6, 3, 7 }; // Przykładowa tablica
+        int length = numbers.Length;
+
+        double median = CalculateMedian(numbers, length);
+        Console.WriteLine($"Mediana: {median}");
+    }
+}
+
+ZADANIE 4
+using System;
+
+class Program
+{
+    static int CalculateRowDifference(int[] row1, int[] row2)
+    {
+        int difference = 0;
+
+        for (int k = 0; k < row1.Length; k++)
+        {
+            difference += (row1[k] - row2[k]) * (row1[k] - row2[k]);
+        }
+
+        return difference;
+    }
+
+    static void FindClosestRows(int[,] matrix, int numRows, int numCols, out int rowIdx1, out int rowIdx2)
+    {
+        rowIdx1 = -1;
+        rowIdx2 = -1;
+        int minDifference = int.MaxValue;
+
+        for (int i = 0; i < numRows - 1; i++)
+        {
+            for (int j = i + 1; j < numRows; j++)
+            {
+                int difference = CalculateRowDifference(GetRow(matrix, i, numCols), GetRow(matrix, j, numCols));
+
+                if (difference < minDifference)
+                {
+                    minDifference = difference;
+                    rowIdx1 = i;
+                    rowIdx2 = j;
+                }
+            }
+        }
+    }
+
+    static int[] GetRow(int[,] matrix, int rowIndex, int numCols)
+    {
+        int[] row = new int[numCols];
+
+        for (int k = 0; k < numCols; k++)
+        {
+            row[k] = matrix[rowIndex, k];
+        }
+
+        return row;
+    }
+
+    static void Main()
+    {
+        int numRows = 4;
+        int numCols = 4;
+        int[,] matrix = {
+            { 1, 2, 3, 4 },
+            { 4, 2, 3, 1 },
+            { 3, 3, 3, 3 },
+            { 7, 6, 5, 4 }
+        };
+
+        FindClosestRows(matrix, numRows, numCols, out int rowIdx1, out int rowIdx2);
+        Console.WriteLine($"Najbardziej zbliżone wiersze to {rowIdx1} i {rowIdx2}");
+    }
+}
 
