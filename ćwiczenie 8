@@ -1,1 +1,131 @@
+ZADANIE 1
+
+enum DayOfWeek
+{
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
+}
+
+enum WashingMachineStage
+{
+    InitialFill,
+    Washing,
+    Rinsing,
+    Spinning,
+    Drying
+}
+
+enum MealsOfDay
+{
+    Breakfast,
+    Lunch,
+    Dinner,
+    Snack
+}
+
+enum ChessPiece
+{
+    King,
+    Queen,
+    Rook,
+    Bishop,
+    Knight,
+    Pawn
+}
+
+ZADANIE 2
+
+struct Student
+{
+    public string FirstName;
+    public string LastName;
+    public int Age;
+    public string StudentID;
+    public double GPA;
+}
+
+
+struct Subject
+{
+    public string SubjectCode;
+    public string SubjectName;
+    public int Credits;
+    public int Semester;
+}
+
+
+struct AcademicTeacher
+{
+    public string FirstName;
+    public string LastName;
+    public int Age;
+    public string EmployeeID;
+    public string Department;
+}
+
+ZADANIE 3 
+using System;
+
+enum Rarity
+{
+    Common,
+    Rare,
+    Unique,
+    Epic
+}
+
+enum ItemType
+{
+    Weapon,
+    Armor,
+    Amulet,
+    Ring,
+    Helmet,
+    Shield,
+    Boots
+}
+
+struct Item
+{
+    public double Weight;
+    public int ValueInGold;
+    public Rarity Rarity;
+    public ItemType Type;
+    public string Name;
+
+    public void FillItem(double weight, int value, Rarity rarity, ItemType type, string name)
+    {
+        Weight = weight;
+        ValueInGold = value;
+        Rarity = rarity;
+        Type = type;
+        Name = name;
+    }
+
+    public void DisplayItemInfo()
+    {
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Type: {Type}");
+        Console.WriteLine($"Rarity: {Rarity}");
+        Console.WriteLine($"Weight: {Weight} kg");
+        Console.WriteLine($"Value: {ValueInGold} gold");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Item sword;
+        sword.FillItem(2.5, 100, Rarity.Rare, ItemType.Weapon, "Sword of Valor");
+
+        Console.WriteLine("Item Information:");
+        sword.DisplayItemInfo();
+    }
+}
 
